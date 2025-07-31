@@ -8,34 +8,55 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewController()
+    
     var body: some View {
         VStack(spacing: 42) {
             HStack {
-                VStack(alignment: .leading) {
-                    HStack(spacing: 10,) {
-                        AsyncImage(url: URL(string: "https://ddragon.leagueoflegends.com/cdn/15.14.1/img/profileicon/654.png")) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(Circle())
-                        } placeholder: {
-                            ProgressView()
+                if (viewModel.isLoading) {
+                    VStack(alignment: .leading) {
+                        HStack(spacing: 10,) {
+                            Skeleton(shape: Circle())
+                            .frame(width: 52, height: 52)
+                            
+                            Skeleton(shape: Rectangle())
+                                .frame(width: 150, height: 15)
+                                .cornerRadius(4)
                         }
-                        .frame(width: 52, height: 52)
                         
-                        Text("Gandalf o Branco #QWQEQ")
-                            .foregroundStyle(ColorTheme.gray200)
-                            .fontWeight(.medium)
-                            .font(.subheadline)
+                        Skeleton(shape: Rectangle())
+                            .frame(width: 30, height: 15)
+                            .padding(.leading, 10)
                     }
-                    
-                    Text("598")
-                        .foregroundStyle(ColorTheme.slate300)
-                        .font(.caption)
-                        .padding(.leading, 14)
+                    Spacer()
                 }
                 
-                Spacer()
+                if let summoner = viewModel.summoner {
+                    VStack(alignment: .leading) {
+                        HStack(spacing: 10,) {
+                            AsyncImage(url: URL(string: summoner.icon)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(Circle())
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: 52, height: 52)
+                            
+                            Text(summoner.name)
+                                .foregroundStyle(ColorTheme.gray200)
+                                .fontWeight(.medium)
+                                .font(.subheadline)
+                        }
+                        
+                        Text("\(summoner.level)")
+                            .foregroundStyle(ColorTheme.slate300)
+                            .font(.caption)
+                            .padding(.leading, 14)
+                    }
+                    Spacer()
+                }
             }
             
             Group {
@@ -65,6 +86,9 @@ struct HomeView: View {
         .padding(.horizontal, 25)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(ColorTheme.slate900)
+        .onAppear {
+            viewModel.getSummoner(name: "Gandalf o Branco", tag: "QWQEQ")
+        }
     }
 }
 
