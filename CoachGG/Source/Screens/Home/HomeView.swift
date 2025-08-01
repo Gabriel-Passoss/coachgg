@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var viewModel = HomeViewController()
+    @StateObject private var viewModel: HomeViewModel
+    @State private var showAlert = false
+    
+    init(summonersRepository: SummonersRepository, matchesRepository: MatchesRepository) {
+        _viewModel = StateObject(wrappedValue: HomeViewModel(summonersRepository: summonersRepository, matchesRepository: matchesRepository))
+    }
     
     var body: some View {
         VStack(spacing: 42) {
             HStack {
-                if (viewModel.isLoading) {
+                if (viewModel.isSummonerLoading) {
                     VStack(alignment: .leading) {
                         HStack(spacing: 10,) {
                             Skeleton(shape: Circle())
@@ -78,8 +83,6 @@ struct HomeView: View {
                 .font(.title3)
                 .fontWeight(.semibold)
             
-            
-            
             Spacer()
         }
         .padding(.top, 12)
@@ -89,9 +92,17 @@ struct HomeView: View {
         .onAppear {
             viewModel.getSummoner(name: "Gandalf o Branco", tag: "QWQEQ")
         }
+        .onReceive(viewModel.$error) { error in
+            if error != nil {
+                showAlert = true
+            }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Error"), message: Text(viewModel.error?.localizedDescription ?? "An error occurred"))
+        }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(summonersRepository: MockSummonersRepository(), matchesRepository: MockMatchesRepository())
 }

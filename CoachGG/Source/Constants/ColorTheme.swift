@@ -20,4 +20,5 @@ struct ColorTheme {
     
     static let gray100 = Color(hex: "#F3F4F6")
     static let gray200 = Color(hex: "#E5E7EB")
+    static let gray300 = Color(hex: "#D1D5DC")
 }
