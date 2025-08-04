@@ -51,6 +51,13 @@ struct HomeView: View {
         .onAppear {
             viewModel.getSummoner(name: "Gandalf o Branco", tag: "QWQEQ")
         }
+        .onChange(of: viewModel.account) { _, newAccount in
+            if let account = newAccount {
+                Task {
+                    viewModel.getRecentMatches(puuid: account.puuid)
+                }
+            }
+        }
         .onReceive(viewModel.$error) { error in
             if error != nil {
                 showAlert = true
@@ -113,23 +120,26 @@ struct HomeView: View {
     
     @ViewBuilder
     private var matchHistory: some View {
-        if viewModel.account != nil {
-            LazyVStack(spacing: 28) {
+        LazyVStack(spacing: 28) {
+            if viewModel.recentMatches.count > 0 {
                 ForEach(viewModel.recentMatches, id: \.metadata.matchId) { item in
                     MatchCard(match: item)
-                    .clipShape(UnevenRoundedRectangle(
-                       topLeadingRadius: 8,
-                       topTrailingRadius: 8
-                    ))
+                        .clipShape(UnevenRoundedRectangle(
+                            topLeadingRadius: 8,
+                            topTrailingRadius: 8,
+                        ))
+                }
+            } else {
+                ForEach(1...20, id: \.self) { index in
+                    Skeleton(shape: Rectangle())
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 170)
+                        .cornerRadius(8)
+                    
                 }
             }
-            .onAppear {
-                viewModel.getRecentMatches(puuid: viewModel.account!.puuid)
-            }
-            .background(ColorTheme.slate900)
-        } else {
-            Spacer()
         }
+        .background(ColorTheme.slate900)
     }
 }
 

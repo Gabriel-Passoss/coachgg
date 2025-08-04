@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct RiotAccount: Codable {
+struct RiotAccount: Codable, Equatable {
     let puuid: String
 }
