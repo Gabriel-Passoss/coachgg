@@ -8,7 +8,7 @@
 import Foundation
 
 class APIMatchesRepository: MatchesRepository {
-    let baseUrl = "http://localhost:3000"
+    let baseUrl = "http://192.168.1.5:3000"
     
     func getRecentMatches(puuid: String) async throws -> [Match] {
         let url = URL(string: "\(baseUrl)/BR1/matches/\(puuid)")!

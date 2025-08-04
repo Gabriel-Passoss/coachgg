@@ -17,22 +17,22 @@ enum APISummonerError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidUrl:
-            return "Invalid URL, please try again later."
+            return "URL inválida, tente novamente mais tarde."
         case .invalidResponse:
-            return "Invalid response, please try again later."
+            return "Resposta inválida, tente novamente mais tarde."
         case .summonerNotFound:
-            return "Summoner not found."
+            return "Invocador não encontrado."
         case .invalidData:
-            return "Invalid data, please try again later."
+            return "Dados inválidos, tente novamente mais tarde."
         case .unknown(let error):
-            return "An unknown error occurred: \(error.localizedDescription)"
+            return "Ocorreu um erro desconhecido: \(error.localizedDescription)"
         }
     }
 }
 
 
 class APISummonersRepository: SummonersRepository {
-    let baseUrl = "http://localhost:3000"
+    let baseUrl = "http://192.168.1.5:3000"
     
     func getSummoner(name: String, tag: String) async throws -> GetSummonerResponse {
         guard let url = URL(string: "\(baseUrl)/BR1/summoners/\(name)/\(tag)") else { throw APISummonerError.invalidUrl}
