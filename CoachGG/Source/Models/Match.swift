@@ -23,16 +23,16 @@ struct Participant: Codable {
     let championName: String
     let championIcon: String
     let goldEarned: Int
-    let individualPosition: String
+    let individualPosition: IndividualPosition
     let primaryRuneIcon: String
     let secondaryRuneIcon: String
-    let item0: String
-    let item1: String
-    let item2: String
-    let item3: String
-    let item4: String
-    let item5: String
-    let item6: String
+    let item0: String?
+    let item1: String?
+    let item2: String?
+    let item3: String?
+    let item4: String?
+    let item5: String?
+    let item6: String?
     let participantId: Int
     let profileIcon: String
     let puuid: String
@@ -63,4 +63,12 @@ struct Info: Codable {
 struct Match: Codable {
     let metadata: MetaData
     let info: Info
+}
+
+enum IndividualPosition: String, Codable {
+    case top = "TOP"
+    case jungle = "JUNGLE"
+    case middle = "MIDDLE"
+    case bottom = "BOTTOM"
+    case utility = "UTILITY"
 }
