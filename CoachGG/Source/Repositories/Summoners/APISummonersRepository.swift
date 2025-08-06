@@ -32,7 +32,7 @@ enum APISummonerError: Error, LocalizedError {
 
 
 class APISummonersRepository: SummonersRepository {
-    let baseUrl = "http://192.168.1.5:3000"
+    let baseUrl = "http://192.168.1.11:3000"
     
     func getSummoner(name: String, tag: String) async throws -> GetSummonerResponse {
         guard let url = URL(string: "\(baseUrl)/BR1/summoners/\(name)/\(tag)") else { throw APISummonerError.invalidUrl}
