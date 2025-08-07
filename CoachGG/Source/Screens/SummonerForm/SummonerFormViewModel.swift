@@ -47,15 +47,4 @@ class SummonerFormViewModel: ObservableObject {
         isLoading = false
         return nil
     }
-    
-    func loadPlayer() -> Player? {
-        isLoading = true
-        if let savedPlayer = UserDefaultsManager.shared.load(Player.self, forKey: "currentPlayer") {
-            isLoading = false
-            return savedPlayer
-        }
-        
-        isLoading = false
-        return nil
-    }
 }

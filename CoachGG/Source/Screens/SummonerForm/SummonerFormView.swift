@@ -105,13 +105,6 @@ struct SummonerFormView: View {
         .onTapGesture {
             isTextFieldFocused = false
         }
-        .onAppear {
-            Task {
-                if let player = viewModel.loadPlayer() {
-                    router.navigate(to: .home(player: player))
-                }
-            }
-        }
         .onReceive(viewModel.$error) { error in
             if error != nil {
                 showAlert = true
