@@ -12,4 +12,16 @@ struct Summoner: Codable {
     let level: Int
     let name: String
     let ranks: [Rank]
+    
+    var summonerName: String {
+        get {
+            return name.components(separatedBy: "#")[0]
+        }
+    }
+    
+    var summonerTag: String {
+        get {
+            return name.components(separatedBy: "#")[1]
+        }
+    }
 }

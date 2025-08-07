@@ -66,11 +66,11 @@ struct MatchCard: View {
                     }
                     
                     Grid(alignment: .leading, horizontalSpacing: 6, verticalSpacing: 2) {
-                        getMatchup(position: IndividualPosition.top)
-                        getMatchup(position: IndividualPosition.jungle)
-                        getMatchup(position: IndividualPosition.middle)
-                        getMatchup(position: IndividualPosition.bottom)
-                        getMatchup(position: IndividualPosition.utility)
+                        getMatchup(position: Lane.top)
+                        getMatchup(position: Lane.jungle)
+                        getMatchup(position: Lane.middle)
+                        getMatchup(position: Lane.bottom)
+                        getMatchup(position: Lane.utility)
                     }
                     .padding(.leading, 14)
                 }
@@ -273,7 +273,7 @@ struct MatchCard: View {
         }
     }
     
-    func getMatchup(position: IndividualPosition) -> some View {
+    func getMatchup(position: Lane) -> some View {
         let matchup = match.info.participants.filter { $0.individualPosition == position }
         
         return GridRow {

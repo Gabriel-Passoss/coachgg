@@ -25,7 +25,15 @@ enum MockSummonerError: Error, LocalizedError {
 }
 
 class MockSummonersRepository: SummonersRepository {
+    var delay: Int = 0
+    
+    init (delay: Int = 0) {
+        self.delay = delay
+    }
+    
     func getSummoner(name: String, tag: String) async throws -> GetSummonerResponse {
+        try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+        
         guard let url = Bundle.main.url(forResource: "GetSummonerMock", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
             print("Failed to load RecentMatchesMock.json file")

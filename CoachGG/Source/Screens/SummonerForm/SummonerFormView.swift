@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct SummonerFormView: View {
-    @Environment(\.modelContext) private var context
+    @Environment(\.modelContext) var context
+    @EnvironmentObject var router: AppRouter
+    @StateObject private var viewModel: SummonerFormViewModel
     
-    private var viewModel: SummonerFormViewModel {
-        SummonerFormViewModel(context: context, summonersRepository: APISummonersRepository())
+    init(summonersRepository: SummonersRepository) {
+        self._viewModel = StateObject(wrappedValue: SummonerFormViewModel(summonersRepository: summonersRepository))
     }
     
     @FocusState private var isTextFieldFocused: Bool
-    @State private var selection: String? = nil
-    @State private var summonerName: String = ""
-    @State private var summonerTag: String = ""
-    
-    
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -43,12 +40,12 @@ struct SummonerFormView: View {
                     hint: "Região",
                     options: Region.allCases.map { $0.stringValue },
                     anchor: .top,
-                    selection: $selection
+                    selection: $viewModel.selection
                 )
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 HStack(spacing: 12) {
-                    TextField("", text: $summonerName, prompt: Text("Nome de invocador").foregroundStyle(ColorTheme.slate400))
+                    TextField("", text: $viewModel.summonerName, prompt: Text("Nome de invocador").foregroundStyle(ColorTheme.slate400))
                         .frame(maxHeight: 32)
                         .padding(.vertical, 8)
                         .padding(.leading, 14)
@@ -62,7 +59,7 @@ struct SummonerFormView: View {
                         .foregroundStyle(ColorTheme.slate400)
                         .font(.system(size: 16, weight: .bold))
                     
-                    TextField("", text: $summonerTag, prompt: Text("Tag").foregroundStyle(ColorTheme.slate400))
+                    TextField("", text: $viewModel.summonerTag, prompt: Text("Tag").foregroundStyle(ColorTheme.slate400))
                         .frame(maxWidth: 72, maxHeight: 32)
                         .padding(.vertical, 8)
                         .padding(.leading, 14)
@@ -76,7 +73,14 @@ struct SummonerFormView: View {
                 }
                 
                 Button(action: {
-                    viewModel.savePlayer(summonerName: summonerName, summonerTag: summonerTag, region: Region.BR)
+                    Task {
+                        if let response = await viewModel.getSummoner() {
+                            let player = Player(summoner: response.summoner, riotAccount: response.account, region: Region.BR)
+                            context.insert(player)
+                            
+                            router.navigate(to: .home(player: player))
+                        }
+                    }
                 }) {
                     HStack(spacing: 6) {
                         Text("Entrar")
@@ -107,5 +111,5 @@ struct SummonerFormView: View {
 }
 
 #Preview {
-    SummonerFormView()
+    SummonerFormView(summonersRepository: MockSummonersRepository())
 }

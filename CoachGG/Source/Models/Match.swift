@@ -23,7 +23,7 @@ struct Participant: Codable {
     let championName: String
     let championIcon: String
     let goldEarned: Int
-    let individualPosition: IndividualPosition
+    let individualPosition: Lane
     let primaryRuneIcon: String
     let secondaryRuneIcon: String
     let item0: String?
@@ -65,7 +65,7 @@ struct Match: Codable {
     let info: Info
 }
 
-enum IndividualPosition: String, Codable {
+enum Lane: String, Codable {
     case top = "TOP"
     case jungle = "JUNGLE"
     case middle = "MIDDLE"

@@ -8,9 +8,15 @@
 import Foundation
 
 class MockMatchesRepository: MatchesRepository {
-    let delay: TimeInterval = 0
+    var delay: Int = 0
+    
+    init(delay: Int = 0) {
+        self.delay = delay
+    }
     
     func getRecentMatches(puuid: String) async throws -> [Match] {
+        try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+        
         guard let url = Bundle.main.url(forResource: "RecentMatchesMock", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
             print("Failed to load RecentMatchesMock.json file")
