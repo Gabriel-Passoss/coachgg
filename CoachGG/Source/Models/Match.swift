@@ -45,6 +45,15 @@ struct Participant: Codable {
     let teamId: Int
     let visionScore: Int
     let win: Bool
+    
+    private var items: [String?] {
+        return [item0, item1, item2, item3, item4, item5, item6]
+    }
+    
+    func getItem(at index: Int) -> String? {
+        guard index >= 0 && index < items.count else { return nil }
+        return items[index]
+    }
 }
 
 struct Team: Codable {

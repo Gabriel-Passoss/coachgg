@@ -61,7 +61,7 @@ struct MatchCard: View {
                             HStack(spacing: 8) {
                                 summonerSpells
                                 
-                                summonerItems
+                                summonerItemsGrid
                             }
                         }
                     }
@@ -188,89 +188,33 @@ struct MatchCard: View {
         }
     }
     
-    private var summonerItems: some View {
-        Grid(horizontalSpacing: 4) {
+    private var summonerItemsGrid: some View {
+        return Grid(horizontalSpacing: 4) {
             GridRow {
-                if currentSummoner.item0 != nil {
-                    AsyncImage(url: URL(string: currentSummoner.item0!)) { image in
-                        image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 20, height: 20)
-                }
-                
-                
-                if currentSummoner.item1 != nil {
-                    AsyncImage(url: URL(string: currentSummoner.item1!)) { image in
-                        image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 20, height: 20)
-                }
-                
-                if currentSummoner.item2 != nil {
-                    AsyncImage(url: URL(string: currentSummoner.item2!)) { image in
-                        image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 20, height: 20)
-                }
-                
-                if currentSummoner.item6 != nil {
-                    AsyncImage(url: URL(string: currentSummoner.item6!)) { image in
-                        image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 20, height: 20)
-                }
+                summonerItem(index: 0)
+                summonerItem(index: 1)
+                summonerItem(index: 2)
+                summonerItem(index: 6)
             }
-            
             GridRow {
-                if currentSummoner.item3 != nil {
-                    AsyncImage(url: URL(string: currentSummoner.item3!)) { image in
-                        image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 20, height: 20)
-                }
-                
-                if currentSummoner.item4 != nil {
-                    AsyncImage(url: URL(string: currentSummoner.item4!)) { image in
-                        image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 20, height: 20)
-                }
-                
-                if currentSummoner.item5 != nil {
-                    AsyncImage(url: URL(string: currentSummoner.item5!)) { image in
-                        image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 20, height: 20)
-                }
+                summonerItem(index: 3)
+                summonerItem(index: 4)
+                summonerItem(index: 5)
             }
+        }
+    }
+    
+    @ViewBuilder
+    func summonerItem(index: Int) -> some View {
+        if let item = currentSummoner.getItem(at: index) {
+            AsyncImage(url: URL(string: item)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+            }
+            .frame(width: 20, height: 20)
         }
     }
     
@@ -315,5 +259,4 @@ struct MatchCard: View {
             }
         }
     }
-    
 }
