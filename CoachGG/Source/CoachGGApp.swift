@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct CoachGGApp: App {
@@ -31,12 +30,11 @@ struct CoachGGApp: App {
                 )
             }
         }
-        .modelContainer(for: [Player.self])
         .environmentObject(router)
     }
     
     private func setupDependencies() {
-        DIContainer.shared.register(SummonersRepository.self, service: MockSummonersRepository())
-        DIContainer.shared.register(MatchesRepository.self, service: MockMatchesRepository())
+        DIContainer.shared.register(SummonersRepository.self, service: APISummonersRepository())
+        DIContainer.shared.register(MatchesRepository.self, service: APIMatchesRepository())
     }
 }

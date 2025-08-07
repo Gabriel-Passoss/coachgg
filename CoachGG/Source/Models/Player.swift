@@ -6,10 +6,8 @@
 //
 
 import Foundation
-import SwiftData
 
-@Model
-class Player {
+class Player: Codable {
     var summoner: Summoner
     var riotAccount: RiotAccount
     var region: Region

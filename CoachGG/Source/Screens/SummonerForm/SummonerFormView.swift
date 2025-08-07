@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct SummonerFormView: View {
-    @Environment(\.modelContext) var context
     @EnvironmentObject var router: AppRouter
     @StateObject private var viewModel: SummonerFormViewModel
+    
+    @State private var showAlert: Bool = false
     
     init(summonersRepository: SummonersRepository) {
         self._viewModel = StateObject(wrappedValue: SummonerFormViewModel(summonersRepository: summonersRepository))
@@ -74,10 +75,7 @@ struct SummonerFormView: View {
                 
                 Button(action: {
                     Task {
-                        if let response = await viewModel.getSummoner() {
-                            let player = Player(summoner: response.summoner, riotAccount: response.account, region: Region.BR)
-                            context.insert(player)
-                            
+                        if let player = await viewModel.savePlayer() {
                             router.navigate(to: .home(player: player))
                         }
                     }
@@ -106,6 +104,24 @@ struct SummonerFormView: View {
         .background(ColorTheme.slate900)
         .onTapGesture {
             isTextFieldFocused = false
+        }
+        .onAppear {
+            Task {
+                if let player = viewModel.loadPlayer() {
+                    router.navigate(to: .home(player: player))
+                }
+            }
+        }
+        .onReceive(viewModel.$error) { error in
+            if error != nil {
+                showAlert = true
+                viewModel.summonerName = ""
+                viewModel.summonerTag = ""
+                viewModel.selection = nil
+            }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Erro"), message: Text(viewModel.error?.localizedDescription ?? "Houve um erro desconhecido"))
         }
     }
 }

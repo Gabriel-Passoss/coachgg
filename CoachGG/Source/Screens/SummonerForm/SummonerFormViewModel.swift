@@ -22,18 +22,40 @@ class SummonerFormViewModel: ObservableObject {
         self.summonersRepository = summonersRepository
     }
     
-    func getSummoner() async -> GetSummonerResponse? {
-        isLoading = true
-        
+    private func verifySummoner() async -> Player? {
         do {
             let response = try await summonersRepository.getSummoner(name: summonerName, tag: summonerTag)
-            self.isLoading = false
-            return response
+            return Player(summoner: response.summoner, riotAccount: response.account, region: Region.BR)
         } catch {
             self.error = error
-            print("Erro ao salvar o invocador: \(error)")
+            print("Erro ao verificar invocador: \(error)")
             isLoading = false
             return nil
         }
+    }
+    
+    func savePlayer() async -> Player? {
+        isLoading = true
+        
+        if let summoner = await verifySummoner() {
+            let player = Player(summoner: summoner.summoner, riotAccount: summoner.riotAccount, region: Region.BR)
+            UserDefaultsManager.shared.save(player, forKey: "currentPlayer")
+            isLoading = false
+            return player
+        }
+        
+        isLoading = false
+        return nil
+    }
+    
+    func loadPlayer() -> Player? {
+        isLoading = true
+        if let savedPlayer = UserDefaultsManager.shared.load(Player.self, forKey: "currentPlayer") {
+            isLoading = false
+            return savedPlayer
+        }
+        
+        isLoading = false
+        return nil
     }
 }

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct MatchCard: View {
     let match: Match
+    let currentPlayer: Player
     
     private var currentSummoner: Participant {
-        let index = match.info.participants.firstIndex(where: { $0.puuid == "ZrXebR0htvpXhiz8D75UGNtYhcCNRqXIAO4kGieSfwJbihV1PKTjTd2sP1CsgqClaL-vw812L7h7iQ" })!
+        let index = match.info.participants.firstIndex(where: { $0.puuid == currentPlayer.riotAccount.puuid })!
         
         return match.info.participants[index]
     }
@@ -274,7 +275,7 @@ struct MatchCard: View {
     }
     
     func getMatchup(position: Lane) -> some View {
-        let matchup = match.info.participants.filter { $0.individualPosition == position }
+        let matchup = match.info.participants.filter { $0.lane == position }
         
         return GridRow {
             HStack {

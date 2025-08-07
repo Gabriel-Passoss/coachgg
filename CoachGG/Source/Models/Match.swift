@@ -23,7 +23,7 @@ struct Participant: Codable {
     let championName: String
     let championIcon: String
     let goldEarned: Int
-    let individualPosition: Lane
+    let lane: Lane
     let primaryRuneIcon: String
     let secondaryRuneIcon: String
     let item0: String?
