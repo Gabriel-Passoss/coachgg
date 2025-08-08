@@ -94,16 +94,23 @@ struct HomeView: View {
                 Spacer()
             } else {
                 VStack(alignment: .leading) {
-                    HStack(spacing: 10,) {
+                    HStack(spacing: 10) {
                         AsyncImage(url: URL(string: viewModel.player.summoner.icon)) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .clipShape(Circle())
+                                .frame(width: 52, height: 52)
                         } placeholder: {
-                            ProgressView()
+                            Group {
+                                LoadingView()
+                                .frame(width: 16, height: 16)
+                            }
+                            .frame(width: 52, height: 52)
+                            .background(ColorTheme.slate800)
+                            .clipShape(Circle())
                         }
-                        .frame(width: 52, height: 52)
+                        
                         
                         Text(viewModel.player.summoner.name)
                             .foregroundStyle(ColorTheme.gray200)

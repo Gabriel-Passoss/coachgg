@@ -11,7 +11,7 @@ struct MatchCardView: View {
     let match: Match
     let currentPlayer: Player
     
-    @ObservedObject private var viewModel = MatchCardViewModel(reportsRepository: MockReportsRepository())
+    @ObservedObject private var viewModel = MatchCardViewModel(reportsRepository: MockReportsRepository(delay: 10))
     @State private var isReportVisible: Bool = false
     @State private var contentOpacity: Double = 0
     @State private var reportContainerHeight: CGFloat = 28
@@ -54,10 +54,16 @@ struct MatchCardView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .clipShape(Circle())
+                                .frame(width: 54, height: 54)
                         } placeholder: {
-                            ProgressView()
+                            Group {
+                                LoadingView()
+                                .frame(width: 16, height: 16)
+                            }
+                            .frame(width: 54, height: 54)
+                            .background(ColorTheme.slate700)
+                            .clipShape(Circle())
                         }
-                        .frame(width: 54, height: 54)
                         .padding(.trailing, 8)
                         
                         VStack(alignment: .leading, spacing: 12) {
@@ -146,19 +152,31 @@ struct MatchCardView: View {
             GridRow {
                 AsyncImage(url: URL(string: currentSummoner.summonerSpell1Icon)) { image in
                     image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        
                 } placeholder: {
-                    ProgressView()
+                    Group {
+                        LoadingView()
+                        .frame(width: 8, height: 8)
+                    }
+                    .frame(width: 20, height: 20)
+                    .background(ColorTheme.slate700)
                 }
                 .frame(width: 20, height: 20)
                 
                 AsyncImage(url: URL(string: currentSummoner.primaryRuneIcon)) { image in
                     image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        
                 } placeholder: {
-                    ProgressView()
+                    Group {
+                        LoadingView()
+                        .frame(width: 8, height: 8)
+                    }
+                    .frame(width: 20, height: 20)
+                    .background(ColorTheme.slate700)
                 }
                 .frame(width: 20, height: 20)
             }
@@ -166,19 +184,31 @@ struct MatchCardView: View {
             GridRow {
                 AsyncImage(url: URL(string: currentSummoner.summonerSpell2Icon)) { image in
                     image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        
                 } placeholder: {
-                    ProgressView()
+                    Group {
+                        LoadingView()
+                        .frame(width: 8, height: 8)
+                    }
+                    .frame(width: 20, height: 20)
+                    .background(ColorTheme.slate700)
                 }
                 .frame(width: 20, height: 20)
                 
                 AsyncImage(url: URL(string: currentSummoner.secondaryRuneIcon)) { image in
                     image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        
                 } placeholder: {
-                    ProgressView()
+                    Group {
+                        LoadingView()
+                        .frame(width: 8, height: 8)
+                    }
+                    .frame(width: 20, height: 20)
+                    .background(ColorTheme.slate700)
                 }
                 .frame(width: 20, height: 20)
             }
@@ -208,8 +238,14 @@ struct MatchCardView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    
             } placeholder: {
-                ProgressView()
+                Group {
+                    LoadingView()
+                    .frame(width: 8, height: 8)
+                }
+                .frame(width: 20, height: 20)
+                .background(ColorTheme.slate700)
             }
             .frame(width: 20, height: 20)
         }
@@ -225,10 +261,14 @@ struct MatchCardView: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 18, height: 18)
                     } placeholder: {
-                        ProgressView()
+                        Group {
+                            LoadingView()
+                            .frame(width: 8, height: 8)
+                        }
                     }
+                    .frame(width: 18, height: 18)
+                    .background(ColorTheme.slate700)
                     
                     Text(matchup[0].riotIdGameName)
                         .foregroundStyle(matchup[0].puuid == currentSummoner.puuid ? .white : ColorTheme.slate300)
@@ -258,10 +298,14 @@ struct MatchCardView: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 18, height: 18)
                     } placeholder: {
-                        ProgressView()
+                        Group {
+                            LoadingView()
+                            .frame(width: 8, height: 8)
+                        }
                     }
+                    .frame(width: 18, height: 18)
+                    .background(ColorTheme.slate700)
                     
                     Text(matchup[1].riotIdGameName)
                         .foregroundStyle(matchup[1].puuid == currentSummoner.puuid ? .white : ColorTheme.slate300)
@@ -391,7 +435,8 @@ struct MatchCardView: View {
                 Spacer()
                 
                 HStack {
-                    ProgressView()
+                    LoadingView()
+                        .frame(width: 12, height: 12)
                     
                     Text("Gerando seu relatório...")
                         .font(.caption)
