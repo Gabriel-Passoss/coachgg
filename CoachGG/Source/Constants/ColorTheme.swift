@@ -12,6 +12,7 @@ struct ColorTheme {
     static let slate300 = Color(hex: "#CAD5E2")
     static let slate400 = Color(hex: "#90A1B9")
     static let slate800 = Color(hex: "#1D293D")
+    static let slate700 = Color(hex: "#334155")
     static let slate900 = Color(hex: "#0F172B")
     
     static let cyan400 = Color(hex: "#00D3F3")

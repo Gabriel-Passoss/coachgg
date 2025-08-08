@@ -126,11 +126,8 @@ struct HomeView: View {
         LazyVStack(spacing: 28) {
             if viewModel.recentMatches.count > 0 {
                 ForEach(viewModel.recentMatches, id: \.metadata.matchId) { item in
-                    MatchCard(match: item, currentPlayer: viewModel.player)
-                        .clipShape(UnevenRoundedRectangle(
-                            topLeadingRadius: 8,
-                            topTrailingRadius: 8,
-                        ))
+                    MatchCardView(match: item, currentPlayer: viewModel.player)
+                        .cornerRadius(8)
                 }
             } else {
                 ForEach(1...20, id: \.self) { index in

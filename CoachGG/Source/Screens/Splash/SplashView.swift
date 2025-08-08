@@ -27,6 +27,8 @@ struct SplashView: View {
                         Task {
                             if let player = viewModel.loadPlayer() {
                                 router.navigate(to: .home(player: player))
+                            } else {
+                                router.navigate(to: .login)
                             }
                         }
                     }
