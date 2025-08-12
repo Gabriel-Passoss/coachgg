@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct CoachGGApp: App {
@@ -43,11 +44,12 @@ struct CoachGGApp: App {
             .animation(.easeInOut(duration: 0.5), value: router.currentRoute)
         }
         .environmentObject(router)
+        .modelContainer(for: EndedMatchReport.self)
     }
     
     private func setupDependencies() {
         DIContainer.shared.register(SummonersRepository.self, service: APISummonersRepository())
         DIContainer.shared.register(MatchesRepository.self, service: APIMatchesRepository())
-        DIContainer.shared.register(ReportsRepository.self, service: MockReportsRepository())
+        DIContainer.shared.register(ReportsRepository.self, service: APIReportsRepository())
     }
 }

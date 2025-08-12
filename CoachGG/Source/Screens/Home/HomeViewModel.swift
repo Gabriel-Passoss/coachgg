@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import SwiftData
 
 @MainActor
 class HomeViewModel: ObservableObject {
     @Published var player: Player
     @Published var recentMatches: [Match] = []
-    @Published var endedMatchReport: [EndedMatchReport] = []
+    @Published var endedMatchReports: [EndedMatchReport] = []
     
     @Published var error: Error?
     @Published var showError: Bool = false
@@ -25,12 +26,13 @@ class HomeViewModel: ObservableObject {
     private let summonersRepository: SummonersRepository
     private let matchesRepository: MatchesRepository
     private var reportsRepository: ReportsRepository
+    var context: ModelContext? = nil
     
     init(
         summonersRepository: SummonersRepository,
         matchesRepository: MatchesRepository,
         reportsRepository: ReportsRepository,
-        player: Player
+        player: Player,
     ) {
         self.summonersRepository = summonersRepository
         self.matchesRepository = matchesRepository
@@ -71,11 +73,24 @@ class HomeViewModel: ObservableObject {
     
     func generateReport(matchId: String, puuid: String) {
         isGeneratingReport[matchId] = true
-        
+        print("bateu aqui")
         Task {
             do {
-                let report = try await reportsRepository.generateEndedMatchReport(matchId: matchId, puuid: puuid)
-                self.endedMatchReport.append(report!.report)
+                let response = try await reportsRepository.generateEndedMatchReport(matchId: matchId, puuid: puuid)
+                if let response = response {
+                    let report = EndedMatchReport(
+                        matchId: response.report.matchId,
+                        matchResume: response.report.matchResume,
+                        pros: response.report.pros,
+                        cons: response.report.cons,
+                        generalWarnings: response.report.generalWarnings,
+                        conclusion: response.report.conclusion
+                    )
+                    
+                    endedMatchReports.append(report)
+                    context?.insert(report)
+                }
+                
                 isGeneratingReport[matchId] = false
             } catch {
                 self.error = error
@@ -83,5 +98,14 @@ class HomeViewModel: ObservableObject {
                 isGeneratingReport[matchId] = false
             }
         }
+    }
+    
+    func fetchReportsFromStorage(matchIds: [String]) {
+        let predicate = #Predicate<EndedMatchReport> { report in
+            matchIds.contains(report.matchId)
+        }
+        
+        let fetchDescriptor = FetchDescriptor<EndedMatchReport>(predicate: predicate)
+        endedMatchReports = (try? context?.fetch(fetchDescriptor)) ?? []
     }
 }

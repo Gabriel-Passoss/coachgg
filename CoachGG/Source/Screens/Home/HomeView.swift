@@ -11,21 +11,20 @@ import SwiftData
 struct HomeView: View {
     @StateObject private var viewModel: HomeViewModel
     @State private var showAlert = false
+    @Environment(\.modelContext) var context
     
     init(
         summonersRepository: SummonersRepository,
         matchesRepository: MatchesRepository,
         reportsRepository: ReportsRepository,
-        player: Player
+        player: Player,
     ) {
-        _viewModel = StateObject(
-            wrappedValue: HomeViewModel(
-                summonersRepository: summonersRepository,
-                matchesRepository: matchesRepository,
-                reportsRepository: reportsRepository,
-                player: player
-            )
-        )
+        self._viewModel = StateObject(wrappedValue: HomeViewModel(
+            summonersRepository: summonersRepository,
+            matchesRepository: matchesRepository,
+            reportsRepository: reportsRepository,
+            player: player,
+        ))
     }
     
     var body: some View {
@@ -62,6 +61,7 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(ColorTheme.slate900)
         .onAppear {
+            viewModel.context = context
             viewModel.loadPlayer()
             viewModel.getRecentMatches()
         }
@@ -139,17 +139,11 @@ struct HomeView: View {
         LazyVStack(spacing: 28) {
             if viewModel.recentMatches.count > 0 {
                 ForEach(viewModel.recentMatches, id: \.metadata.matchId) { item in
-                    MatchCardView(
-                        match: item,
-                        currentPlayer: viewModel.player,
-                        report: viewModel.endedMatchReport.first(where: { $0.matchId == item.metadata.matchId}),
-                        isGeneratingReport: Binding(
-                            get: { viewModel.isGeneratingReport[item.metadata.matchId] ?? false },
-                            set: { viewModel.isGeneratingReport[item.metadata.matchId] = $0 }
-                        ),
-                        generateReport: viewModel.generateReport
-                    )
+                    matchCardView(for: item)
                         .cornerRadius(8)
+                }
+                .onAppear {
+                    viewModel.fetchReportsFromStorage(matchIds: viewModel.recentMatches.compactMap { $0.metadata.matchId })
                 }
             } else {
                 ForEach(1...20, id: \.self) { index in
@@ -162,6 +156,20 @@ struct HomeView: View {
             }
         }
         .background(ColorTheme.slate900)
+    }
+    
+    @ViewBuilder
+    private func matchCardView(for item: Match) -> some View {
+        MatchCardView(
+            match: item,
+            currentPlayer: viewModel.player,
+            report: viewModel.endedMatchReports.first(where: { $0.matchId == item.metadata.matchId}),
+            isGeneratingReport: Binding(
+                get: { viewModel.isGeneratingReport[item.metadata.matchId] ?? false },
+                set: { viewModel.isGeneratingReport[item.metadata.matchId] = $0 }
+            ),
+            generateReport: viewModel.generateReport
+        )
     }
 }
 

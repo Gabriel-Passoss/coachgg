@@ -8,7 +8,7 @@
 import Foundation
 
 struct GenerateEndedMatchReportResponse: Decodable {
-    let report: EndedMatchReport
+    let report: EndedMatchReportDTO
 }
 
 protocol ReportsRepository {
