@@ -15,12 +15,14 @@ struct HomeView: View {
     init(
         summonersRepository: SummonersRepository,
         matchesRepository: MatchesRepository,
+        reportsRepository: ReportsRepository,
         player: Player
     ) {
         _viewModel = StateObject(
             wrappedValue: HomeViewModel(
                 summonersRepository: summonersRepository,
                 matchesRepository: matchesRepository,
+                reportsRepository: reportsRepository,
                 player: player
             )
         )
@@ -67,6 +69,10 @@ struct HomeView: View {
             if error != nil {
                 showAlert = true
             }
+        }
+        .refreshable {
+            viewModel.loadPlayer()
+            viewModel.getRecentMatches()
         }
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Error"), message: Text(viewModel.error?.localizedDescription ?? "An error occurred"))
@@ -133,7 +139,16 @@ struct HomeView: View {
         LazyVStack(spacing: 28) {
             if viewModel.recentMatches.count > 0 {
                 ForEach(viewModel.recentMatches, id: \.metadata.matchId) { item in
-                    MatchCardView(match: item, currentPlayer: viewModel.player)
+                    MatchCardView(
+                        match: item,
+                        currentPlayer: viewModel.player,
+                        report: viewModel.endedMatchReport.first(where: { $0.matchId == item.metadata.matchId}),
+                        isGeneratingReport: Binding(
+                            get: { viewModel.isGeneratingReport[item.metadata.matchId] ?? false },
+                            set: { viewModel.isGeneratingReport[item.metadata.matchId] = $0 }
+                        ),
+                        generateReport: viewModel.generateReport
+                    )
                         .cornerRadius(8)
                 }
             } else {

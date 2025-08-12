@@ -8,6 +8,7 @@
 import Foundation
 
 struct EndedMatchReport: Codable {
+    let matchId: String
     let matchResume: String
     let pros: [String]
     let cons: [String]

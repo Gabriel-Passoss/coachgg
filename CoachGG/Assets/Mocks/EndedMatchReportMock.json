@@ -1,19 +1,22 @@
 {
   "report": {
-    "matchResume": "Você fez um ótimo jogo de Smolder, garantindo bastante dano e impacto em lutas. Apesar de ter sido pressionado na rota, conseguiu aplicar muito dano em teamfights e contribuiu bem para os objetivos.",
+    "matchId": "BR1_3129688377",
+    "matchResume": "Você enfrentou um Renekton no topo e saiu atrás já nos primeiros minutos. Terminou 2/9/3, sem levar torre e com ~4,9 CS por minuto. O Renekton abriu mais de 4 mil de ouro, empurrou barricadas e virou o lado do mapa, enquanto você ficou como principal fonte de ouro para o time inimigo. Ainda assim, colocou 5 sentinelas de controle e ficou vivo o suficiente para aplicar alguns controles de grupo importantes em lutas.",
     "pros": [
-      "Farm excelente: 352 minions em 43 minutos, mantendo sempre o gold alto para fechar builds rápido.",
-      "Alto dano total: foi quem mais contribuiu para o dano do time, ficando próximo do topo entre todos participantes.",
-      "Boas decisões de rotação: você acompanhou o time e participou de objetivos, pegando assistências importantes.",
-      "Participação nas eliminações: 25 participações e kill participation de 50%, mantendo-se relevante mesmo quando sem kills."
+      "Boa colocação de visão: 14 sentinelas totais e 5 de controle, mantendo o rio coberto.",
+      "Teve um solo kill cedo, mostrando que entende o potencial do Q+E em range corpo-a-corpo.",
+      "Conseguiu engajar e imobilizar o Renekton 4 vezes para o seu caçador, mesmo atrás.",
+      "Sobreviveu a alguns mergulhos com 1 dígito de vida, indicando uso correto da passiva para sustento."
     ],
     "cons": [
-      "Muitas vezes ficou sem visão lateral e foi encontrado fora de posição, principalmente no mid/late game.",
-      "Faltou controle de wave em alguns momentos, permitindo que o time inimigo te engajasse no mid.",
-      "Utilização defensiva do curar e flash poderia ter sido melhor para evitar algumas mortes, especialmente em engages duvidosos.",
-      "Não pressionou tanto a torre adversária na lane phase, poderia forçar mais, já que estava farmando muito e tinha prioridade em boa parte do tempo."
+      "CS baixo (148 em 29 min). Isso atrasou níveis e ouro, dificultando brigar de igual para igual.",
+      "9 mortes, muitas antes dos 14 min, entregando ouro e controle de rota ao Renekton.",
+      "Pouca pressão de torre (3 k de dano na estrutura) — a rota ficou sempre empurrada contra você.",
+      "Uso tímido do Teleporte: só 3 utilizações e nenhuma para criar vantagem numérica em dragão ou arauto.",
+      "W pouco valor: foram apenas 4,7 k de dano verdadeiro no jogo todo; sinal de que está usando fora do pico de dano ou virado para o lado errado.",
+      "Só 1 sentinela inimiga abatida; visão foi colocada, mas não negada."
     ],
-    "generalWarnings": "Fique atento sempre ao mapa e mantenha visão lateral de mid e bot, especialmente contra campeões com engage forte. Tente jogar mais próximo do suporte em fights importantes e lembre-se: posicionamento é tudo para o Smolder no mid/late.",
-    "conclusion": "Continue focando em manter o farm alto e padrão de dano, mas procure melhorar o posicionamento e visão, principalmente nas transições e fights grandes. Isso vai te ajudar a morrer menos e aumentar ainda mais sua influência nas partidas."
+    "generalWarnings": "Renekton é mais forte nos níveis 1-3 e explora trocas curtas. Se tomar dois ciclos de dash + stun com a barra de fúria cheia, dificilmente você ganha a troca. Evite lutar quando a fúria dele estiver acima de 50 e mantenha a onda congelada perto da sua torre nos primeiros 6 min. Caso fique atrás, jogue recuado e peça ajuda do jungler — estender troca sozinho só aumenta a vantagem dele.",
+    "conclusion": "Foque em três pontos: (1) gerenciamento de ondas — congele a wave cedo, force o Renekton a avançar e abra janela para gank; (2) padrão de troca — guarde seu E para interromper o segundo dash dele e use o W apenas depois de receber o dano pesado, virado para o alvo; (3) macro & Teleporte — plante visão profunda no tri-arbusto ou pixel, limpe wards com varredor e use TP pro drag ou pra cobrir dive no bot. Executando isso, você neutraliza o early game do Renekton e transforma o Sett em frontliner sólido para as lutas de meio de jogo."
   }
 }

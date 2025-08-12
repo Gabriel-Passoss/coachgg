@@ -10,8 +10,10 @@ import SwiftUI
 struct MatchCardView: View {
     let match: Match
     let currentPlayer: Player
+    let report: EndedMatchReport?
+    @Binding var isGeneratingReport: Bool
+    let generateReport: (String, String) -> Void
     
-    @ObservedObject private var viewModel = MatchCardViewModel(reportsRepository: MockReportsRepository(delay: 10))
     @State private var isReportVisible: Bool = false
     @State private var contentOpacity: Double = 0
     @State private var reportContainerHeight: CGFloat = 28
@@ -333,7 +335,7 @@ struct MatchCardView: View {
     
     @ViewBuilder
     private var generateReportView: some View {
-        if let report = viewModel.endedMatchReport {
+        if let report = report {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 12) {
                     Text("Seu relatório desta partida:")
@@ -393,7 +395,7 @@ struct MatchCardView: View {
                 .opacity(contentOpacity)
             }
             .padding(.horizontal, 16)
-            .padding(.bottom, 30)
+            .padding(.bottom, 32)
             .foregroundStyle(ColorTheme.gray100)
             .frame(maxWidth: .infinity, maxHeight: reportContainerHeight)
             .clipped()
@@ -430,7 +432,7 @@ struct MatchCardView: View {
                 }
             }
             
-        } else if viewModel.isGeneratingReport {
+        } else if isGeneratingReport {
             HStack {
                 Spacer()
                 
@@ -458,7 +460,7 @@ struct MatchCardView: View {
                 Spacer()
                 
                 Button {
-                    viewModel.generateReport(matchId: match.metadata.matchId, puuid: currentPlayer.riotAccount.puuid)
+                    generateReport(match.metadata.matchId, currentPlayer.riotAccount.puuid)
                 } label: {
                     HStack {
                         Image(systemName: "plus.circle")

@@ -33,11 +33,13 @@ struct CoachGGApp: App {
                     HomeView(
                         summonersRepository: DIContainer.shared.resolve(SummonersRepository.self),
                         matchesRepository: DIContainer.shared.resolve(MatchesRepository.self),
+                        reportsRepository: DIContainer.shared.resolve(ReportsRepository.self),
                         player: player
                     )
                     .transition(.move(edge: .trailing).combined(with: .opacity))
                 }
             }
+            .preferredColorScheme(.dark)
             .animation(.easeInOut(duration: 0.5), value: router.currentRoute)
         }
         .environmentObject(router)
@@ -46,5 +48,6 @@ struct CoachGGApp: App {
     private func setupDependencies() {
         DIContainer.shared.register(SummonersRepository.self, service: APISummonersRepository())
         DIContainer.shared.register(MatchesRepository.self, service: APIMatchesRepository())
+        DIContainer.shared.register(ReportsRepository.self, service: MockReportsRepository())
     }
 }
