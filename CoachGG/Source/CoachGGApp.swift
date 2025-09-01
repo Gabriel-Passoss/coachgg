@@ -49,7 +49,7 @@ struct CoachGGApp: App {
     
     private func setupDependencies() {
         DIContainer.shared.register(SummonersRepository.self, service: APISummonersRepository())
-        DIContainer.shared.register(MatchesRepository.self, service: APIMatchesRepository())
+        DIContainer.shared.register(MatchesRepository.self, service: MockMatchesRepository())
         DIContainer.shared.register(ReportsRepository.self, service: APIReportsRepository())
     }
 }

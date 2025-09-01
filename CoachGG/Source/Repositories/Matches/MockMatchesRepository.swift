@@ -32,4 +32,23 @@ class MockMatchesRepository: MatchesRepository {
             return []
         }
     }
+    
+    func getCurrentMatch(puuid: String) async throws -> CurrentMatch? {
+        try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+        
+        guard let url = Bundle.main.url(forResource: "CurrentMatchMock", withExtension: "json"),
+              let data = try? Data(contentsOf: url) else {
+            print("Failed to load RecentMatchesMock.json file")
+            return nil
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            let match = try decoder.decode(CurrentMatch.self, from: data)
+            return match
+        } catch {
+            print("Failed to decode RecentMatchesMock: \(error)")
+            return nil
+        }
+    }
 }

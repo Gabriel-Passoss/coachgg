@@ -46,6 +46,43 @@ class APIMatchesRepository: MatchesRepository {
             throw MatchRequestError.invalidData
         }
     }
+    
+    func getCurrentMatch(puuid: String) async throws -> CurrentMatch? {
+        let url = URL(string: "\(baseUrl)/BR1/matches/current/\(puuid)")!
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse else {
+            throw MatchRequestError.invalidResponse
+        }
+        
+        if response.statusCode == 204 {
+            return nil
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            return try decoder.decode(CurrentMatch.self, from: data)
+        } catch {
+            print("JSON Decoding Error: \(error)")
+            // For more details about the error:
+            if let decodingError = error as? DecodingError {
+                switch decodingError {
+                case .keyNotFound(let key, let context):
+                    print("Key '\(key.stringValue)' not found: \(context.debugDescription)")
+                case .typeMismatch(let type, let context):
+                    print("Type '\(type)' mismatch: \(context.debugDescription)")
+                case .valueNotFound(let type, let context):
+                    print("Value of type '\(type)' not found: \(context.debugDescription)")
+                case .dataCorrupted(let context):
+                    print("Data corrupted: \(context.debugDescription)")
+                @unknown default:
+                    print("Unknown decoding error: \(decodingError)")
+                }
+            }
+        }
+        
+        throw MatchRequestError.invalidData
+    }
 }
 
 enum MatchRequestError: Error {

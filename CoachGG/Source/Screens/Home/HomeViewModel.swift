@@ -11,6 +11,7 @@ import SwiftData
 @MainActor
 class HomeViewModel: ObservableObject {
     @Published var player: Player
+    @Published var currentMatch: CurrentMatch?
     @Published var recentMatches: [Match] = []
     @Published var endedMatchReports: [EndedMatchReport] = []
     
@@ -18,6 +19,8 @@ class HomeViewModel: ObservableObject {
     @Published var showError: Bool = false
     
     @Published var isPlayerLoading: Bool = false
+    
+    @Published var isCurrentMatchLoading: Bool = false
     
     @Published var isRecentMatchesLoading: Bool = false
     
@@ -54,6 +57,22 @@ class HomeViewModel: ObservableObject {
                 isPlayerLoading = false
             }
         }
+    }
+    
+    func getCurrentMatch() {
+        isCurrentMatchLoading = true
+        
+        Task {
+            do {
+                let currentMatch = try await matchesRepository.getCurrentMatch(puuid: player.riotAccount.puuid)
+                self.currentMatch = currentMatch
+                self.isCurrentMatchLoading = false
+            } catch {
+                self.error = error
+                self.isCurrentMatchLoading = false
+            }
+        }
+        
     }
     
     func getRecentMatches() {

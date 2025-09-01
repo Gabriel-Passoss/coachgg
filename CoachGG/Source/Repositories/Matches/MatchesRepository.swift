@@ -9,4 +9,6 @@ import Foundation
 
 protocol MatchesRepository {
     func getRecentMatches(puuid: String) async throws -> [Match]
+    
+    func getCurrentMatch(puuid: String) async throws -> CurrentMatch?
 }

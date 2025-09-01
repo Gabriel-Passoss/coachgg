@@ -1,0 +1,106 @@
+{
+  "gameId": 3130847707,
+  "gameStartTime": 1755265154768,
+  "participants": [
+    {
+      "championId": 37,
+      "championName": "Sona",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Sona.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/6907.png",
+      "teamId": 100,
+      "puuid": "MPq4PT78zkcaiQC5z-YmwLhpxnJP-lROqjl9inH6tf2FBemIdBZ_hnLqgpU7KoseLuk55u85BIobGw",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerFlash.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerHeal.png"
+    },
+    {
+      "championId": 82,
+      "championName": "Mordekaiser",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Mordekaiser.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/5980.png",
+      "teamId": 100,
+      "puuid": "jYx6Fm6wTyWsS3vUlclIQszN6zOVEIRLM8L-PJfTXfY8TJ8iwK2nNBj60YK2Od3RhE_w66wjfRLsQg",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerHaste.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerDot.png"
+    },
+    {
+      "championId": 245,
+      "championName": "Ekko",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Ekko.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/6852.png",
+      "teamId": 100,
+      "puuid": "PxN-Wt7Wsp0zumMxfF-yPDvc8JHPKkdLUAAsDgaxstsuXetvxJOv2nR8vV8SN4KYZVmN_5hdbo_UGQ",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerFlash.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerDot.png"
+    },
+    {
+      "championId": 141,
+      "championName": "Kayn",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Kayn.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/6383.png",
+      "teamId": 100,
+      "puuid": "ht58Q8spTyzKLXOEu-ujnmNkYC2x5K3ZKkrFImogOYodr8sqRItX-11YmlzcTKQLOhPKUQUotMfAag",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerSmite.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerFlash.png"
+    },
+    {
+      "championId": 360,
+      "championName": "Samira",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Samira.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/6831.png",
+      "teamId": 100,
+      "puuid": "PpW04C_IoaK9D7P2IAOsVrCPKtPAGheAclzRXP76w9dcSqtpckOyOQskExFEdCAIouwa_OjJp7bJZQ",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerFlash.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerBarrier.png"
+    },
+    {
+      "championId": 122,
+      "championName": "Darius",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Darius.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/5922.png",
+      "teamId": 200,
+      "puuid": "wqf9KoR5_1x6zq7SFYTK35XPADsNYr5994Jv5A4Ko6aD78CgyHFrqH7rMJHs8ZpWWO4gGdwj4If_GA",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerHaste.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerTeleport.png"
+    },
+    {
+      "championId": 134,
+      "championName": "Syndra",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Syndra.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/6381.png",
+      "teamId": 200,
+      "puuid": "HjDc0N3ET9fGOt1V2AOzAYYadNuQ6970_-pliOyzTlSEJJg0HS_VF-2cKkARFc5BOR4LWHhKrb62cw",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerFlash.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerTeleport.png"
+    },
+    {
+      "championId": 145,
+      "championName": "Kai'Sa",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Kaisa.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/13.png",
+      "teamId": 200,
+      "puuid": "Cj1VToWyOrklLAtD5wA8BO786Oa5Wnlm-PAVCgTyONcLJYjq37KTa5yS8YyzQv41IFKFRMrQdfNIAw",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerFlash.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerExhaust.png"
+    },
+    {
+      "championId": 412,
+      "championName": "Thresh",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Thresh.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/3614.png",
+      "teamId": 200,
+      "puuid": "T2KqILqXJ9Rdezpr3WrSgTy852njEJnta0ghi-ysgNq3T9PMw52eJawoOUEfKKjoyplHJXLYw9rUsg",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerFlash.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerDot.png"
+    },
+    {
+      "championId": 517,
+      "championName": "Sylas",
+      "championIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Sylas.png",
+      "profileIcon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/profileicon/6100.png",
+      "teamId": 200,
+      "puuid": "ZrXebR0htvpXhiz8D75UGNtYhcCNRqXIAO4kGieSfwJbihV1PKTjTd2sP1CsgqClaL-vw812L7h7iQ",
+      "spell1Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerSmite.png",
+      "spell2Icon": "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/spell/SummonerFlash.png"
+    }
+  ]
+}

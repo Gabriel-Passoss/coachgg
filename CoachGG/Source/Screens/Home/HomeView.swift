@@ -63,6 +63,7 @@ struct HomeView: View {
         .onAppear {
             viewModel.context = context
             viewModel.loadPlayer()
+            viewModel.getCurrentMatch()
             viewModel.getRecentMatches()
         }
         .onReceive(viewModel.$error) { error in
@@ -79,7 +80,6 @@ struct HomeView: View {
         }
     }
     
-    @ViewBuilder
     private var summonerInfo: some View {
         HStack {
             if (viewModel.isPlayerLoading) {
@@ -134,10 +134,9 @@ struct HomeView: View {
         }
     }
     
-    @ViewBuilder
     private var matchHistory: some View {
         LazyVStack(spacing: 28) {
-            if viewModel.recentMatches.count > 0 {
+            if viewModel.recentMatches.count > 0 && viewModel.isRecentMatchesLoading == false {
                 ForEach(viewModel.recentMatches, id: \.metadata.matchId) { item in
                     matchCardView(for: item)
                         .cornerRadius(8)
@@ -158,7 +157,6 @@ struct HomeView: View {
         .background(ColorTheme.slate900)
     }
     
-    @ViewBuilder
     private func matchCardView(for item: Match) -> some View {
         MatchCardView(
             match: item,
