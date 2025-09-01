@@ -41,7 +41,6 @@ struct Participant: Codable {
     let summonerSpell1Icon: String
     let summonerSpell2Icon: String
     let summonerLevel: Int
-    let summonerName: String
     let teamId: Int
     let visionScore: Int
     let win: Bool
